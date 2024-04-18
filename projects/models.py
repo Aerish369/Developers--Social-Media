@@ -20,7 +20,19 @@ class Project(models.Model):
         return self.title
     
     class Meta:
-        ordering = ['created'] #! Makes the ordering of project from old to new 
+        ordering = ['created'] #! Makes the ordering of project from old to new and adding '-' makes it from new to old
+
+    @property
+    def getVoteCount(self):
+        reviews = self.review_set.all()
+        upVotes = reviews.filter(value='up').count()
+        totalVotes = reviews.count()
+        ratio = (upVotes / totalVotes) * 100
+        self.vote_total = totalVotes
+        self.vote_ratio = ratio
+        self.save()
+
+
 
 class Review(models.Model):
     VOTE_TYPE = (
