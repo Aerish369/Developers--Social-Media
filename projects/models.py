@@ -20,7 +20,7 @@ class Project(models.Model):
         return self.title
     
     class Meta:
-        ordering = ['created'] #! Makes the ordering of project from old to new and adding '-' makes it from new to old
+        ordering = ['-vote_ratio', '-vote_total', 'title'] #! Makes the ordering of project from old to new and adding '-' makes it from new to old
 
     @property
     def getVoteCount(self):

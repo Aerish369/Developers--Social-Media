@@ -32,7 +32,7 @@ def viewProject(request, pk):
         review.owner = request.user.profile
         review.save()
 
-        projectObj.getVoteCount #! Updates vote count and ratio
+        projectObj.getVoteCount #! Updates vote count and ratio 
 
         messages.success(request, 'Your review was successfully submitted !')
         return redirect('view-project', pk=projectObj.id)
