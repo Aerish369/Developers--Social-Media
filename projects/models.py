@@ -19,9 +19,6 @@ class Project(models.Model):
     def __str__(self):
         return self.title
     
-    class Meta:
-        ordering = ['-vote_ratio', '-vote_total', 'title'] #! Makes the ordering of project from old to new and adding '-' makes it from new to old
-
     @property
     def getVoteCount(self):
         reviews = self.review_set.all()
@@ -31,6 +28,15 @@ class Project(models.Model):
         self.vote_total = totalVotes
         self.vote_ratio = ratio
         self.save()
+
+    @property
+    def reviewers(self):
+        queryset = self.review_set.all().values_list('owner__id', flat=True)
+        return queryset
+    
+    class Meta:
+        ordering = ['-vote_ratio', '-vote_total', 'title'] #! Makes the ordering of project from old to new and adding '-' makes it from new to old
+
 
 
 
