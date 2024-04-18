@@ -34,7 +34,7 @@ def loginUser(request):
         return redirect('home')
 
     if request.method == 'POST':
-        username = request.POST['username']
+        username = request.POST['username'].lower()
         password = request.POST['password']
 
         try:
@@ -47,7 +47,7 @@ def loginUser(request):
 
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect(request.GET['next'] if 'next' in request.GET else 'home') #! Redirects to the page the user was trying to access before logging in
         else:
             messages.error(request, "Username or Password is incorrect")
 
