@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from .models import Profile, Skill
+from .models import Profile, Skill, Message
 from .utils import searchProfiles,  paginateProfiles
 from django.contrib.auth.models import User
 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
-from .forms import CustomUserCreationForm, ProfileForm, SkillForm
+from .forms import CustomUserCreationForm, ProfileForm, SkillForm, MessageForm
 
 from django.contrib import messages
 
@@ -224,3 +224,40 @@ def deleteSkill(request, pk):
         'object':skill,
     }
     return render(request, 'delete_template.html', context)
+
+
+@login_required(login_url="login-page")
+def inbox(request):
+    profile = request.user.profile
+    messageRequest = profile.messages.all()
+    unreadCount = messageRequest.filter(is_read=False).count()
+
+    context = {
+        'messageRequest': messageRequest,
+        'unreadCount': unreadCount,
+    }
+    return render(request, 'users/inbox.html', context)
+
+
+@login_required(login_url="login-page")
+def viewMessages(request, pk):
+    profile = request.user.profile
+    message = profile.messages.get(id=pk)
+
+    if message.is_read == False:
+        message.is_read = True
+        message.save()
+
+    context = {
+        'message': message,
+    }
+    return render(request, 'users/message.html', context)
+
+
+def createMessage(request, pk ):
+    recipient = Profile.objects.get(id=pk)
+
+    context = {
+        'recipient': recipient,
+    }
+    return render(request, 'users/message_form.html', context)
