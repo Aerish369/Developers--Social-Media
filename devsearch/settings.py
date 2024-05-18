@@ -22,7 +22,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'rest_framework',
 
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -114,12 +113,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'fakeemail@gmail.com'
-EMAIL_HOST_PASSWORD = 'fakepassword123'
+EMAIL_HOST_USER = 'dummyemail@gmail.com'
+EMAIL_HOST_PASSWORD = 'dummypassword'
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/'rmuq namn kkhv tuve'
+# https://docs.djangoproject.com/en/4.2/howto/static-files/'rmuq namn kkhv tuve'/django-admin startproject devsearch
 
 STATIC_URL = 'static/'
 
