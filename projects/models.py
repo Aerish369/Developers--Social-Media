@@ -39,7 +39,6 @@ class Project(models.Model):
 
 
 
-
 class Review(models.Model):
     VOTE_TYPE = (
         ('up', 'Up Vote'),
