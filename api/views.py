@@ -17,13 +17,16 @@ def getRoutes(request):
         {'POST': '/api/users/token'},
         {'POST': '/api/users/token/refresh'},
 
+        {'PUT': '/api/projects/id/update-vote'},
+
+        {'DELETE': 'api/projects/id/delete-vote'},
+
     ]
 
     return Response(routes)
 
 @api_view(['GET'])
 def getProjects(request):
-    print('User:', request.user)
     projects = Project.objects.all()
     serializer = ProjectSerializer(projects, many=True)
     return Response(serializer.data)
@@ -49,10 +52,49 @@ def voteProject(request, pk):
         project = project,
     )
     review.value = data['value']
-    review.body =  data['body']
     review.save()
     project.getVoteCount
 
     serializer = ProjectSerializer(project, many=False)
 
+    return Response(serializer.data)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateVoteProject(request, pk):
+    project = Project.objects.get(id=pk)
+    user = request.user.profile
+    data = request.data
+
+    review = Review.objects.get(owner=user, project=project)
+    review.value = data['value']
+    review.save()
+    project.getVoteCount
+    
+    serializer = ProjectSerializer(project, many=False)
+
+    return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def deleteVoteProject(request, pk):
+    project = Project.objects.get(id=pk)
+    user = request.user.profile
+
+    try:
+        review = Review.objects.get(owner=user, project=project)
+    except Review.DoesNotExist:
+        print('Review does not exist')
+        return Response('Review does not exist')
+    
+
+    if review.owner.user == request.user:
+        print(f"Id: {review.id} body: {review.body} value: {review.value} is deleted")
+        review.delete()
+    else:
+        print("Deletion Failed")
+
+    serializer = ProjectSerializer(project, many=False)
     return Response(serializer.data)
