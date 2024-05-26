@@ -13,3 +13,7 @@ This is a Django-based web application for managing user profiles and skills.
 ## Installation
 
 1. Clone this repository:
+
+2. pip install -r requirements.txt
+
+3. python manage.py runserver
