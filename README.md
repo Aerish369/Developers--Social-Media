@@ -89,5 +89,5 @@ Start the server
 
 ## Acknowledgements
 
-- This project was based on [this tutorial](https://dennisivy.teachable.com/courses/enrolled/1446896) by [@divanov11](https://github.com/divanov11/)
+- This project was based on [this course](https://dennisivy.teachable.com/courses/enrolled/1446896) by [@divanov11](https://github.com/divanov11/)
 
