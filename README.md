@@ -2,10 +2,6 @@
 # DevSearch
 
 
-This web application has been developed based on the insights gained from the [Python Django - Complete Course](https://dennisivy.teachable.com/courses/enrolled/1446896) instructed by [@divanov11](https://github.com/divanov11/), serving as a practical application of the course's teachings.
-
-### General Info
-
 This web application, built on Django, enables users to search for developers according to their skills and projects. Developers have the capability to enhance their profiles by listing their skills and projects.
 
 
@@ -89,5 +85,6 @@ Start the server
 
 ## Acknowledgements
 
-- This project was based on [this course](https://dennisivy.teachable.com/courses/enrolled/1446896) by [@divanov11](https://github.com/divanov11/)
+- This project was based on [this course](https://dennisivy.teachable.com/courses/enrolled/1446896) by [@divanov11](https://github.com/divanov11/), serving as a practical application of the course's teachings.
+
 
